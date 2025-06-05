@@ -131,14 +131,14 @@
     xValueText=document.createElementNS(ns,'text');
     xValueText.setAttribute('class','label');
     xValueText.setAttribute('text-anchor','middle');
-    xValueText.setAttribute('y',height-margin.bottom+15);
+    xValueText.setAttribute('y',height-margin.bottom-8);
     xValueText.setAttribute('visibility','hidden');
     svg.appendChild(xValueText);
 
     yValueText=document.createElementNS(ns,'text');
     yValueText.setAttribute('class','label');
-    yValueText.setAttribute('text-anchor','end');
-    yValueText.setAttribute('x',margin.left-8);
+    yValueText.setAttribute('text-anchor','start');
+    yValueText.setAttribute('x',margin.left+8);
     yValueText.setAttribute('visibility','hidden');
     svg.appendChild(yValueText);
   }
