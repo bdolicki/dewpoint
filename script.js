@@ -40,14 +40,14 @@
     const path = document.createElementNS(ns,'path');
     path.setAttribute('d',`M${x0},${y0}L${x1},${y0}`);
     path.setAttribute('fill','none');
-    path.setAttribute('stroke','black');
+    path.setAttribute('stroke','#444');
     xAxis.appendChild(path);
     for(let i=0;i<=10;i++){
       const x = xScale(i*10);
       const tick = document.createElementNS(ns,'line');
       tick.setAttribute('x1',x); tick.setAttribute('x2',x);
       tick.setAttribute('y1',y0); tick.setAttribute('y2',y0+5);
-      tick.setAttribute('stroke','black');
+      tick.setAttribute('stroke','#444');
       xAxis.appendChild(tick);
       const text = document.createElementNS(ns,'text');
       text.setAttribute('x',x); text.setAttribute('y',y0+15);
@@ -70,14 +70,14 @@
     const yPath=document.createElementNS(ns,'path');
     yPath.setAttribute('d',`M${x0},${margin.top}L${x0},${y0}`);
     yPath.setAttribute('fill','none');
-    yPath.setAttribute('stroke','black');
+    yPath.setAttribute('stroke','#444');
     yAxis.appendChild(yPath);
     for(let i=-40;i<=40;i+=10){
       const y=yScale(i);
       const tick=document.createElementNS(ns,'line');
       tick.setAttribute('x1',x0-5); tick.setAttribute('x2',x0);
       tick.setAttribute('y1',y); tick.setAttribute('y2',y);
-      tick.setAttribute('stroke','black');
+      tick.setAttribute('stroke','#444');
       yAxis.appendChild(tick);
       const text=document.createElementNS(ns,'text');
       text.setAttribute('x',x0-8); text.setAttribute('y',y+4);
