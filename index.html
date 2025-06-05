@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dewpoint Visualization</title>
+<style>
+ body { margin:0; font-family: Arial, sans-serif; }
+ #chart { width:100%; height:400px; touch-action:none; user-select:none; -webkit-user-select:none; }
+ .axis line, .axis path { stroke:black; }
+ .grid line { stroke:#ccc; stroke-dasharray:2,2; }
+ .curve { fill:none; stroke:steelblue; stroke-width:2; }
+ .label { font-size:12px; }
+ .indicator { font-size:14px; font-weight:bold; }
+</style>
+</head>
+<body>
+<svg id="chart"></svg>
+<p>Scroll vertically to change air temperature. Move horizontally to read dewpoint values.</p>
+<script src="script.js"></script>
+</body>
+</html>
