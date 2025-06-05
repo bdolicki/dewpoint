@@ -9,8 +9,12 @@
  .axis line, .axis path { stroke:black; }
  .grid line { stroke:#ccc; stroke-dasharray:2,2; }
  .curve { fill:none; stroke:steelblue; stroke-width:2; }
- .label { font-size:12px; }
- .indicator { font-size:14px; font-weight:bold; }
+  .label { font-size:12px; }
+  .indicator { font-size:14px; font-weight:bold; }
+  @media (max-width:600px), (orientation:portrait) {
+    .label { font-size:16px; }
+    .indicator { font-size:18px; }
+  }
 </style>
 </head>
 <body>
