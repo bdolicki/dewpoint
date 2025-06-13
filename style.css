@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  background: #f4f6f8;
+  color: #212121;
+}
+
+header {
+  background-color: #1976D2;
+  color: #fff;
+  text-align: center;
+  padding: 1.25rem 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+header h1 {
+  font-weight: 400;
+  margin: 0;
+  font-size: 2rem; /* Increased base h1 size */
+}
+
+.main {
+  max-width: 800px;
+  margin: 2rem auto; /* Default margin for landscape / larger screens */
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 2rem;
+}
+
+/* New Calculator Styles */
+.calculator-section {
+  margin-bottom: 2rem; /* Space between sections */
+  padding: 1rem;
+  background-color: #f9f9f9; /* Light background for sections */
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.calculator-section:last-child {
+  margin-bottom: 0; /* No margin for the last section */
+}
+
+.calculator-section label {
+  display: block;
+  font-size: 1.1rem; /* Increased from previous general .label */
+  font-weight: 400; /* Medium weight */
+  color: #333;
+  margin-bottom: 0.75rem;
+}
+
+.picker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 0.5rem;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.07);
+}
+
+.picker button {
+  font-size: 1.5rem; /* Larger buttons */
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  color: #555;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.picker button:hover {
+  background-color: #e9e9e9;
+  border-color: #bbb;
+}
+
+.picker button:active {
+  background-color: #ddd;
+}
+
+.value-display {
+  font-size: 1.75rem; /* Larger value display */
+  font-weight: 700;
+  color: #1976D2; /* Use primary color */
+  min-width: 60px; /* Ensure some space */
+  text-align: center;
+  padding: 0 0.5rem;
+}
+
+.output-section label {
+  font-size: 1.2rem; /* Slightly larger for the final output label */
+  font-weight: 700;
+}
+
+.output-display {
+  font-size: 2.25rem; /* Prominent dewpoint output */
+  font-weight: 700;
+  color: #2c3e50; /* A darker, neutral color for output */
+  display: block; /* Make it block to center easily */
+  text-align: center;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: #e8f4fd; /* Very light blue background */
+  border-radius: 6px;
+}
+
+
+/* General Portrait Mode Styling */
+@media (orientation: portrait) {
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: center; /* Added to center .main vertically */
+  }
+  .main {
+    margin: 1rem auto;
+    width: calc(100% - 2rem);
+    /* flex-grow: 1; */ /* Allow .main to take natural height or grow if content pushes it */
+    display: flex;
+    flex-direction: column;
+    /* Consider removing flex-grow: 1 from .main if content is short and body handles centering */
+  }
+  header h1 { /* Ensure h1 is not overly large in portrait */
+    font-size: 1.8rem; /* Adjusted for new base */
+  }
+}
+
+/* Mobile and Small Tablets in Portrait */
+@media (max-width: 767px) and (orientation: portrait) {
+  .main {
+    margin: 1rem;
+    padding: 1.5rem;
+    width: auto;
+  }
+  /* Adjust calculator font sizes if needed for this breakpoint */
+  .calculator-section label {
+    font-size: 1rem;
+  }
+  .picker button {
+    font-size: 1.3rem;
+    padding: 0.2rem 0.6rem;
+  }
+  .value-display {
+    font-size: 1.5rem;
+  }
+  .output-section label {
+    font-size: 1.1rem;
+  }
+  .output-display {
+    font-size: 2rem;
+  }
+}
+
+/* Smaller Mobile Devices in Portrait */
+@media (max-width: 420px) and (orientation: portrait) {
+  .main {
+    margin: 0.5rem;
+    padding: 1rem; /* Reduced padding for .main */
+    border-radius: 8px;
+    width: auto;
+  }
+  header h1 {
+    font-size: 1.7rem; /* Adjusted for new base */
+  }
+  /* Further adjust calculator font sizes for very small screens */
+  .calculator-section {
+    padding: 0.75rem; /* Reduced padding for sections */
+    margin-bottom: 1.5rem;
+  }
+  .calculator-section label {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  .picker {
+    padding: 0.4rem;
+  }
+  .picker button {
+    font-size: 1.2rem;
+    padding: 0.15rem 0.5rem;
+  }
+  .value-display {
+    font-size: 1.3rem;
+    min-width: 50px;
+  }
+  .output-section label {
+    font-size: 1rem;
+  }
+  .output-display {
+    font-size: 1.75rem;
+    padding: 0.5rem;
+  }
+}
+
+/* Landscape Mode for Phones (max-height: 500px) */
+@media (orientation: landscape) and (max-height: 500px) {
+  body {
+    min-height: initial;
+    display: block;
+    justify-content: flex-start; /* Reset justify-content */
+  }
+  .main {
+    padding: 1rem;
+    margin: 1rem auto;
+    max-width: calc(100% - 2rem);
+    flex-grow: 0;
+    display: block;
+  }
+  header h1 {
+    font-size: 1.6rem;
+    padding: 0.75rem 1rem;
+  }
+  header {
+    padding: 0;
+  }
+  /* Adjust calculator for landscape if needed */
+  .calculator-section {
+    margin-bottom: 1rem; /* Tighter spacing for landscape */
+  }
+  .picker { /* Allow pickers to be closer if horizontal space is tight */
+    flex-wrap: wrap; /* Allow wrapping if needed, though not ideal for this layout */
+    justify-content: center; /* Center items if they wrap */
+  }
+  .picker button {
+    margin: 0.25rem; /* Add some margin if they might wrap */
+  }
+}
