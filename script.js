@@ -122,24 +122,25 @@
     svg.appendChild(tempText);
 
     pointerLine=document.createElementNS(ns,'line');
-    pointerLine.setAttribute('stroke','red');
+    pointerLine.setAttribute('class', 'pointer-line'); // Assign class
+    pointerLine.setAttribute('stroke','red'); // Keep existing stroke color, can be moved to CSS if preferred
     pointerLine.setAttribute('y1',margin.top);
     pointerLine.setAttribute('y2',height-margin.bottom);
-    pointerLine.setAttribute('visibility','hidden');
+    // Initial visibility is now handled by CSS (.pointer-line default)
     svg.appendChild(pointerLine);
 
     xValueText=document.createElementNS(ns,'text');
-    xValueText.setAttribute('class','label');
+    xValueText.setAttribute('class','label value-label x-value-label'); // Assign classes
     xValueText.setAttribute('text-anchor','middle');
     xValueText.setAttribute('y',height-margin.bottom-8);
-    xValueText.setAttribute('visibility','hidden');
+    // Initial visibility is now handled by CSS (.value-label default)
     svg.appendChild(xValueText);
 
     yValueText=document.createElementNS(ns,'text');
-    yValueText.setAttribute('class','label');
+    yValueText.setAttribute('class','label value-label y-value-label'); // Assign classes
     yValueText.setAttribute('text-anchor','start');
     yValueText.setAttribute('x',margin.left+8);
-    yValueText.setAttribute('visibility','hidden');
+    // Initial visibility is now handled by CSS (.value-label default)
     svg.appendChild(yValueText);
   }
 
@@ -165,19 +166,30 @@
     const y = yScale(dp);
     pointerLine.setAttribute('x1',x);
     pointerLine.setAttribute('x2',x);
-    pointerLine.setAttribute('visibility','visible');
+    pointerLine.classList.add('visible');
+    pointerLine.style.visibility = 'visible';
+
     xValueText.setAttribute('x',x);
     xValueText.textContent=rh.toFixed(1)+'%';
-    xValueText.setAttribute('visibility','visible');
+    xValueText.classList.add('visible');
+    xValueText.style.visibility = 'visible';
+
     yValueText.setAttribute('y',y+4);
     yValueText.textContent=dp.toFixed(1)+'°C';
-    yValueText.setAttribute('visibility','visible');
+    yValueText.classList.add('visible');
+    yValueText.style.visibility = 'visible';
   }
 
   function hidePointer(){
-    pointerLine.setAttribute('visibility','hidden');
-    xValueText.setAttribute('visibility','hidden');
-    yValueText.setAttribute('visibility','hidden');
+    pointerLine.classList.remove('visible');
+    xValueText.classList.remove('visible');
+    yValueText.classList.remove('visible');
+
+    setTimeout(() => {
+      if (!pointerLine.classList.contains('visible')) pointerLine.style.visibility = 'hidden';
+      if (!xValueText.classList.contains('visible')) xValueText.style.visibility = 'hidden';
+      if (!yValueText.classList.contains('visible')) yValueText.style.visibility = 'hidden';
+    }, 200); // Match transition duration in CSS
   }
 
   svg.addEventListener('mousemove',e=>{

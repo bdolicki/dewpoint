@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  background: #f4f6f8;
+  color: #212121;
+}
+
+header {
+  background-color: #1976D2;
+  color: #fff;
+  text-align: center;
+  padding: 1.25rem 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+header h1 {
+  font-weight: 400;
+  margin: 0;
+}
+
+.main {
+  max-width: 800px;
+  margin: 2rem auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 2rem;
+}
+
+#chart {
+  width: 100%;
+  height: 400px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.axis line,
+.axis path {
+  stroke: #BDBDBD;
+}
+
+.curve {
+  fill: none;
+  stroke: #1976D2;
+  stroke-width: 2.5px;
+  transition: stroke 0.3s ease-in-out; /* Added transition for stroke */
+}
+
+/* Base label style */
+.label {
+  font-size: 0.75rem; /* 12px */
+  fill: #616161;
+}
+
+.indicator {
+  font-size: 0.875rem; /* 14px */
+  font-weight: 700;
+  fill: #1976D2;
+}
+
+.instructions {
+  text-align: center;
+  color: #757575;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+/* Styles for pointer elements for transitions */
+.pointer-line,
+.value-label {
+  opacity: 0;
+  transform: translateY(5px); /* Initial subtle offset */
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+  visibility: hidden; /* Initially hidden and not taking space if possible */
+}
+
+.pointer-line.visible,
+.value-label.visible {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible; /* Make visible when active */
+}
+
+/* Media Query for tablets and larger phones */
+@media (max-width: 600px), (orientation: portrait) {
+  .main {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  #chart {
+    height: 320px; /* Increased height slightly */
+  }
+  .label {
+    font-size: 0.85rem; /* Larger for better readability on mobile */
+  }
+  .indicator {
+    font-size: 1rem; /* Larger for better readability on mobile */
+  }
+}
+
+/* Media Query for smaller mobile devices */
+@media (max-width: 420px) {
+  .main {
+    margin: 0.5rem;
+    padding: 1rem;
+    border-radius: 8px; /* Slightly smaller border radius */
+  }
+  #chart {
+    height: 280px;
+  }
+  .label {
+    font-size: 0.75rem; /* Back to base or slightly smaller if needed */
+  }
+  .indicator {
+    font-size: 0.9rem;
+  }
+  header h1 {
+    font-size: 1.5rem; /* Slightly smaller h1 for very small screens */
+  }
+  .instructions {
+    font-size: 0.75rem; /* Slightly smaller instructions */
+  }
+}
