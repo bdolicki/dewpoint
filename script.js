@@ -1,7 +1,7 @@
 (function(){
   const svg = document.getElementById('chart');
   const ns = 'http://www.w3.org/2000/svg';
-  const margin = {top:20,right:60,bottom:30,left:40};
+  const margin = {top:20, right:80, bottom:50, left:60}; // Updated margins
   let width, height;
   let temperature = 20; // initial T
   const minDp = -50;
@@ -50,7 +50,7 @@
       tick.setAttribute('stroke','#444');
       xAxis.appendChild(tick);
       const text = document.createElementNS(ns,'text');
-      text.setAttribute('x',x); text.setAttribute('y',y0+15);
+      text.setAttribute('x',x); text.setAttribute('y',y0+20); // Adjusted y position
       text.setAttribute('text-anchor','middle');
       text.setAttribute('class','label');
       text.textContent=i*10;
@@ -59,7 +59,7 @@
     svg.appendChild(xAxis);
     const xlabel=document.createElementNS(ns,'text');
     xlabel.setAttribute('x',(x0+x1)/2);
-    xlabel.setAttribute('y',height-5);
+    xlabel.setAttribute('y',height-10); // Adjusted y position
     xlabel.setAttribute('text-anchor','middle');
     xlabel.setAttribute('class','label');
     xlabel.textContent='Relative Humidity (%)';
@@ -80,7 +80,7 @@
       tick.setAttribute('stroke','#444');
       yAxis.appendChild(tick);
       const text=document.createElementNS(ns,'text');
-      text.setAttribute('x',x0-8); text.setAttribute('y',y+4);
+      text.setAttribute('x',x0-10); text.setAttribute('y',y+4); // Adjusted x position
       text.setAttribute('text-anchor','end');
       text.setAttribute('class','label');
       text.textContent=i;
@@ -89,10 +89,11 @@
     svg.appendChild(yAxis);
 
     const ylabel=document.createElementNS(ns,'text');
-    ylabel.setAttribute('transform',`rotate(-90 15 ${(margin.top+y0)/2})`);
+    // Adjusted x in transform and direct x attribute
+    ylabel.setAttribute('transform',`rotate(-90 ${margin.left/3} ${(margin.top+y0)/2})`);
     ylabel.setAttribute('text-anchor','middle');
     ylabel.setAttribute('class','label');
-    ylabel.setAttribute('x',15);
+    ylabel.setAttribute('x', margin.left / 3); // Adjusted x position (e.g., 20 if margin.left is 60)
     ylabel.setAttribute('y',(margin.top+y0)/2);
     ylabel.textContent='Dewpoint (°C)';
     svg.appendChild(ylabel);
@@ -115,31 +116,32 @@
     const x = xScale(100);
     const y = yScale(dewpoint(temperature,100));
     tempText=document.createElementNS(ns,'text');
-    tempText.setAttribute('x',x+5);
-    tempText.setAttribute('y',y-5);
+    tempText.setAttribute('x',x+8); // Adjusted x position
+    tempText.setAttribute('y',y-8); // Adjusted y position
     tempText.setAttribute('class','indicator');
     tempText.textContent=`${temperature} °C`;
     svg.appendChild(tempText);
 
     pointerLine=document.createElementNS(ns,'line');
-    pointerLine.setAttribute('stroke','red');
+    pointerLine.setAttribute('class', 'pointer-line'); // Assign class
+    pointerLine.setAttribute('stroke','red'); // Keep existing stroke color, can be moved to CSS if preferred
     pointerLine.setAttribute('y1',margin.top);
     pointerLine.setAttribute('y2',height-margin.bottom);
-    pointerLine.setAttribute('visibility','hidden');
+    // Initial visibility is now handled by CSS (.pointer-line default)
     svg.appendChild(pointerLine);
 
     xValueText=document.createElementNS(ns,'text');
-    xValueText.setAttribute('class','label');
+    xValueText.setAttribute('class','label value-label x-value-label'); // Assign classes
     xValueText.setAttribute('text-anchor','middle');
-    xValueText.setAttribute('y',height-margin.bottom-8);
-    xValueText.setAttribute('visibility','hidden');
+    xValueText.setAttribute('y',height-margin.bottom-10); // Adjusted y position
+    // Initial visibility is now handled by CSS (.value-label default)
     svg.appendChild(xValueText);
 
     yValueText=document.createElementNS(ns,'text');
-    yValueText.setAttribute('class','label');
+    yValueText.setAttribute('class','label value-label y-value-label'); // Assign classes
     yValueText.setAttribute('text-anchor','start');
-    yValueText.setAttribute('x',margin.left+8);
-    yValueText.setAttribute('visibility','hidden');
+    yValueText.setAttribute('x',margin.left+10); // Adjusted x position
+    // Initial visibility is now handled by CSS (.value-label default)
     svg.appendChild(yValueText);
   }
 
@@ -153,8 +155,8 @@
     curvePath.setAttribute('d',d);
     const x=xScale(100);
     const y=yScale(dewpoint(temperature,100));
-    tempText.setAttribute('x',x+5);
-    tempText.setAttribute('y',y-5);
+    tempText.setAttribute('x',x+8); // Adjusted x position
+    tempText.setAttribute('y',y-8); // Adjusted y position
     tempText.textContent=`${temperature} °C`;
   }
 
@@ -165,19 +167,30 @@
     const y = yScale(dp);
     pointerLine.setAttribute('x1',x);
     pointerLine.setAttribute('x2',x);
-    pointerLine.setAttribute('visibility','visible');
+    pointerLine.classList.add('visible');
+    pointerLine.style.visibility = 'visible';
+
     xValueText.setAttribute('x',x);
     xValueText.textContent=rh.toFixed(1)+'%';
-    xValueText.setAttribute('visibility','visible');
+    xValueText.classList.add('visible');
+    xValueText.style.visibility = 'visible';
+
     yValueText.setAttribute('y',y+4);
     yValueText.textContent=dp.toFixed(1)+'°C';
-    yValueText.setAttribute('visibility','visible');
+    yValueText.classList.add('visible');
+    yValueText.style.visibility = 'visible';
   }
 
   function hidePointer(){
-    pointerLine.setAttribute('visibility','hidden');
-    xValueText.setAttribute('visibility','hidden');
-    yValueText.setAttribute('visibility','hidden');
+    pointerLine.classList.remove('visible');
+    xValueText.classList.remove('visible');
+    yValueText.classList.remove('visible');
+
+    setTimeout(() => {
+      if (!pointerLine.classList.contains('visible')) pointerLine.style.visibility = 'hidden';
+      if (!xValueText.classList.contains('visible')) xValueText.style.visibility = 'hidden';
+      if (!yValueText.classList.contains('visible')) yValueText.style.visibility = 'hidden';
+    }, 200); // Match transition duration in CSS
   }
 
   svg.addEventListener('mousemove',e=>{

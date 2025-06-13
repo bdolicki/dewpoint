@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  background: #f4f6f8;
+  color: #212121;
+}
+
+header {
+  background-color: #1976D2;
+  color: #fff;
+  text-align: center;
+  padding: 1.25rem 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+header h1 {
+  font-weight: 400;
+  margin: 0;
+  font-size: 2rem; /* Increased base h1 size */
+}
+
+.main {
+  max-width: 800px;
+  margin: 2rem auto; /* Default margin for landscape / larger screens */
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 2rem;
+}
+
+#chart {
+  width: 100%;
+  height: 450px; /* Increased base height */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.axis line,
+.axis path {
+  stroke: #BDBDBD;
+}
+
+.curve {
+  fill: none;
+  stroke: #1976D2;
+  stroke-width: 2.5px;
+  transition: stroke 0.3s ease-in-out;
+}
+
+.label {
+  font-size: 1rem; /* Increased base: 16px */
+  fill: #616161;
+}
+
+.indicator {
+  font-size: 1.25rem; /* Increased base: 20px */
+  font-weight: 700;
+  fill: #1976D2;
+}
+
+.pointer-line,
+.value-label {
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+  visibility: hidden;
+}
+
+.pointer-line.visible,
+.value-label.visible {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+/* General Portrait Mode Styling */
+@media (orientation: portrait) {
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .main {
+    margin: 1rem auto;
+    width: calc(100% - 2rem);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  #chart {
+     flex-grow: 1;
+  }
+  header h1 { /* Ensure h1 is not overly large in portrait */
+    font-size: 1.8rem; /* Adjusted for new base */
+  }
+}
+
+/* Mobile and Small Tablets in Portrait */
+@media (max-width: 767px) and (orientation: portrait) {
+  .main {
+    margin: 1rem;
+    padding: 1.5rem;
+    width: auto;
+  }
+  #chart {
+    height: 45vh;
+    min-height: 330px; /* Increased min-height */
+  }
+  .label {
+    font-size: 1.1rem; /* Adjusted: ~17.6px */
+  }
+  .indicator {
+    font-size: 1.35rem; /* Adjusted: ~21.6px */
+  }
+}
+
+/* Smaller Mobile Devices in Portrait */
+@media (max-width: 420px) and (orientation: portrait) {
+  .main {
+    margin: 0.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    width: auto;
+  }
+  #chart {
+    min-height: 300px; /* Increased min-height */
+    height: 40vh;
+  }
+  .label {
+    font-size: 1rem; /* Adjusted: 16px (match new base) */
+  }
+  .indicator {
+    font-size: 1.25rem; /* Adjusted: 20px (match new base) */
+  }
+  header h1 {
+    font-size: 1.7rem; /* Adjusted for new base */
+  }
+}
+
+/* Landscape Mode for Phones (max-height: 500px) */
+@media (orientation: landscape) and (max-height: 500px) {
+  body {
+    min-height: initial; /* Override 100vh from portrait, allow natural height */
+    display: block; /* Override flex from portrait */
+  }
+  .main {
+    padding: 1rem;
+    margin: 1rem auto; /* Adjusted from 0.5rem for a bit more space */
+    max-width: calc(100% - 2rem); /* Ensure it doesn't hit edges */
+    flex-grow: 0; /* Override portrait */
+    display: block; /* Override portrait */
+  }
+  #chart {
+    height: 60vh; /* Relative to viewport height */
+    max-height: 300px; /* Cap the height */
+    min-height: 220px; /* Increased min-height */
+    flex-grow: 0; /* Override portrait */
+  }
+  .label {
+    font-size: 1rem; /* Adjusted: 16px */
+  }
+  .indicator {
+    font-size: 1.25rem; /* Adjusted: 20px */
+  }
+  header h1 {
+    font-size: 1.6rem; /* Adjusted for new base */
+    padding: 0.75rem 1rem; /* Reduce header padding */
+  }
+  header {
+    padding: 0; /* Remove header's own padding if h1 controls it */
+  }
+}
