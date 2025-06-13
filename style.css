@@ -19,8 +19,7 @@ header {
 header h1 {
   font-weight: 400;
   margin: 0;
-  /* Base h1 size can be larger, e.g., 1.75rem or 2rem, if not set elsewhere */
-  font-size: 1.75rem;
+  font-size: 2rem; /* Increased base h1 size */
 }
 
 .main {
@@ -34,7 +33,7 @@ header h1 {
 
 #chart {
   width: 100%;
-  height: 400px;
+  height: 450px; /* Increased base height */
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
@@ -53,12 +52,12 @@ header h1 {
 }
 
 .label {
-  font-size: 0.75rem; /* Base: 12px */
+  font-size: 1rem; /* Increased base: 16px */
   fill: #616161;
 }
 
 .indicator {
-  font-size: 0.875rem; /* Base: 14px */
+  font-size: 1.25rem; /* Increased base: 20px */
   font-weight: 700;
   fill: #1976D2;
 }
@@ -96,7 +95,7 @@ header h1 {
      flex-grow: 1;
   }
   header h1 { /* Ensure h1 is not overly large in portrait */
-    font-size: 1.6rem;
+    font-size: 1.8rem; /* Adjusted for new base */
   }
 }
 
@@ -109,13 +108,13 @@ header h1 {
   }
   #chart {
     height: 45vh;
-    min-height: 300px;
+    min-height: 330px; /* Increased min-height */
   }
   .label {
-    font-size: 0.9rem;
+    font-size: 1.1rem; /* Adjusted: ~17.6px */
   }
   .indicator {
-    font-size: 1.1rem;
+    font-size: 1.35rem; /* Adjusted: ~21.6px */
   }
 }
 
@@ -128,17 +127,17 @@ header h1 {
     width: auto;
   }
   #chart {
-    min-height: 280px;
+    min-height: 300px; /* Increased min-height */
     height: 40vh;
   }
   .label {
-    font-size: 0.8rem;
+    font-size: 1rem; /* Adjusted: 16px (match new base) */
   }
   .indicator {
-    font-size: 1rem;
+    font-size: 1.25rem; /* Adjusted: 20px (match new base) */
   }
   header h1 {
-    font-size: 1.5rem;
+    font-size: 1.7rem; /* Adjusted for new base */
   }
 }
 
@@ -158,17 +157,17 @@ header h1 {
   #chart {
     height: 60vh; /* Relative to viewport height */
     max-height: 300px; /* Cap the height */
-    min-height: 200px; /* Ensure it's not too small */
+    min-height: 220px; /* Increased min-height */
     flex-grow: 0; /* Override portrait */
   }
   .label {
-    font-size: 0.85rem;
+    font-size: 1rem; /* Adjusted: 16px */
   }
   .indicator {
-    font-size: 1rem;
+    font-size: 1.25rem; /* Adjusted: 20px */
   }
   header h1 {
-    font-size: 1.5rem;
+    font-size: 1.6rem; /* Adjusted for new base */
     padding: 0.75rem 1rem; /* Reduce header padding */
   }
   header {
