@@ -19,11 +19,13 @@ header {
 header h1 {
   font-weight: 400;
   margin: 0;
+  /* Base h1 size can be larger, e.g., 1.75rem or 2rem, if not set elsewhere */
+  font-size: 1.75rem;
 }
 
 .main {
   max-width: 800px;
-  margin: 2rem auto;
+  margin: 2rem auto; /* Default margin for landscape / larger screens */
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -47,17 +49,16 @@ header h1 {
   fill: none;
   stroke: #1976D2;
   stroke-width: 2.5px;
-  transition: stroke 0.3s ease-in-out; /* Added transition for stroke */
+  transition: stroke 0.3s ease-in-out;
 }
 
-/* Base label style */
 .label {
-  font-size: 0.75rem; /* 12px */
+  font-size: 0.75rem; /* Base: 12px */
   fill: #616161;
 }
 
 .indicator {
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem; /* Base: 14px */
   font-weight: 700;
   fill: #1976D2;
 }
@@ -69,59 +70,122 @@ header h1 {
   font-size: 0.8rem;
 }
 
-/* Styles for pointer elements for transitions */
 .pointer-line,
 .value-label {
   opacity: 0;
-  transform: translateY(5px); /* Initial subtle offset */
+  transform: translateY(5px);
   transition: opacity 0.2s ease-out, transform 0.2s ease-out;
-  visibility: hidden; /* Initially hidden and not taking space if possible */
+  visibility: hidden;
 }
 
 .pointer-line.visible,
 .value-label.visible {
   opacity: 1;
   transform: translateY(0);
-  visibility: visible; /* Make visible when active */
+  visibility: visible;
 }
 
-/* Media Query for tablets and larger phones */
-@media (max-width: 600px), (orientation: portrait) {
+/* General Portrait Mode Styling */
+@media (orientation: portrait) {
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .main {
+    margin: 1rem auto;
+    width: calc(100% - 2rem);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  #chart {
+     flex-grow: 1;
+  }
+  header h1 { /* Ensure h1 is not overly large in portrait */
+    font-size: 1.6rem;
+  }
+}
+
+/* Mobile and Small Tablets in Portrait */
+@media (max-width: 767px) and (orientation: portrait) {
   .main {
     margin: 1rem;
     padding: 1.5rem;
+    width: auto;
   }
   #chart {
-    height: 320px; /* Increased height slightly */
+    height: 45vh;
+    min-height: 300px;
   }
   .label {
-    font-size: 0.85rem; /* Larger for better readability on mobile */
+    font-size: 0.9rem;
   }
   .indicator {
-    font-size: 1rem; /* Larger for better readability on mobile */
+    font-size: 1.1rem;
   }
 }
 
-/* Media Query for smaller mobile devices */
-@media (max-width: 420px) {
+/* Smaller Mobile Devices in Portrait */
+@media (max-width: 420px) and (orientation: portrait) {
   .main {
     margin: 0.5rem;
     padding: 1rem;
-    border-radius: 8px; /* Slightly smaller border radius */
+    border-radius: 8px;
+    width: auto;
   }
   #chart {
-    height: 280px;
+    min-height: 280px;
+    height: 40vh;
   }
   .label {
-    font-size: 0.75rem; /* Back to base or slightly smaller if needed */
+    font-size: 0.8rem;
   }
   .indicator {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
   header h1 {
-    font-size: 1.5rem; /* Slightly smaller h1 for very small screens */
+    font-size: 1.5rem;
   }
   .instructions {
-    font-size: 0.75rem; /* Slightly smaller instructions */
+    font-size: 0.75rem;
+  }
+}
+
+/* Landscape Mode for Phones (max-height: 500px) */
+@media (orientation: landscape) and (max-height: 500px) {
+  body {
+    min-height: initial; /* Override 100vh from portrait, allow natural height */
+    display: block; /* Override flex from portrait */
+  }
+  .main {
+    padding: 1rem;
+    margin: 1rem auto; /* Adjusted from 0.5rem for a bit more space */
+    max-width: calc(100% - 2rem); /* Ensure it doesn't hit edges */
+    flex-grow: 0; /* Override portrait */
+    display: block; /* Override portrait */
+  }
+  #chart {
+    height: 60vh; /* Relative to viewport height */
+    max-height: 300px; /* Cap the height */
+    min-height: 200px; /* Ensure it's not too small */
+    flex-grow: 0; /* Override portrait */
+  }
+  .label {
+    font-size: 0.85rem;
+  }
+  .indicator {
+    font-size: 1rem;
+  }
+  .instructions {
+    font-size: 0.85rem;
+    margin-top: 0.25rem; /* Reduced margin */
+  }
+  header h1 {
+    font-size: 1.5rem;
+    padding: 0.75rem 1rem; /* Reduce header padding */
+  }
+  header {
+    padding: 0; /* Remove header's own padding if h1 controls it */
   }
 }
